@@ -12,6 +12,14 @@ public class MyRectangle implements Polygon {
         this.breadth = breadth;
     }
 
+    public static MyRectangle createRectangle(int length, int breadth) {
+        return new MyRectangle(length, breadth);
+    }
+
+    public static MyRectangle createSquare(int side) {
+        return new MyRectangle(side, side);
+    }
+
     @Override
     public int area() {
         return length * breadth;
