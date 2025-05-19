@@ -1,8 +1,6 @@
 package models;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -10,7 +8,7 @@ public class ProbabilityTest {
     @Test
     void gettingTails() {
         Probability gettingTails = Probability.create(0.5);
-        assert(Probability.create(0.5).equals(gettingTails.complement()));
+        assert(Probability.create(0.5).equals(gettingTails));
     }
 
     @Test
@@ -31,5 +29,13 @@ public class ProbabilityTest {
     void shouldThrowError() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Probability.create(3));
         assertEquals("Illegal Probability", exception.getMessage());
+        IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> Probability.create(-0.1));
+        assertEquals("Illegal Probability", exception2.getMessage());
+    }
+
+    @Test
+    void atleastOneTail() {
+        Probability gettingTails = Probability.create(0.5);
+        assert(Probability.create(0.75).equals(gettingTails.or(gettingTails)));
     }
 }

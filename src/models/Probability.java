@@ -26,6 +26,11 @@ public class Probability {
         return new Probability(this.probability * that.probability);
     }
 
+    public Probability or(Probability that) {
+        double atleastOne = complement().and(that.complement()).complement().probability;
+        return new Probability(atleastOne);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -37,4 +42,5 @@ public class Probability {
     public int hashCode() {
         return Objects.hashCode(probability);
     }
+
 }
