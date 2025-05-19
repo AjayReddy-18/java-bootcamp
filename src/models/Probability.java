@@ -10,7 +10,7 @@ public class Probability {
         this.probability = probability;
     }
 
-    public static Probability create(double probability) throws RangeException {
+    public static Probability create(double probability) throws IllegalArgumentException {
         if (probability < 0 || probability > 1) {
             throw new IllegalArgumentException("Illegal Probability");
         }

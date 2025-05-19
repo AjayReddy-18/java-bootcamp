@@ -1,6 +1,7 @@
 package models;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,5 +25,11 @@ public class ProbabilityTest {
         Probability probabilityOfTwoCoins = gettingTails.and(gettingTails);
 
         assert(Probability.create(0.25).equals(probabilityOfTwoCoins));
+    }
+
+    @Test
+    void shouldThrowError() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Probability.create(3));
+        assertEquals("Illegal Probability", exception.getMessage());
     }
 }
