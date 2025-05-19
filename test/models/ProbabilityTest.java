@@ -26,7 +26,7 @@ public class ProbabilityTest {
     }
 
     @Test
-    void shouldThrowError() {
+    void shouldThrowErrorWhenArguementsAreInvalid() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Probability.create(3));
         assertEquals("Illegal Probability", exception.getMessage());
         IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> Probability.create(-0.1));

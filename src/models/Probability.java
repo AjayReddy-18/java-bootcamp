@@ -1,6 +1,5 @@
 package models;
 
-import org.w3c.dom.ranges.RangeException;
 import java.util.Objects;
 
 public class Probability {
