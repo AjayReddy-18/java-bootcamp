@@ -18,5 +18,4 @@ public class MyRectangleTest {
         int perimeter = myRectangle.perimeter();
         assertEquals(12, perimeter);
     }
-
 }

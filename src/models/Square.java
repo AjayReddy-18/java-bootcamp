@@ -2,21 +2,8 @@ package models;
 
 import interfaces.Polygon;
 
-public class Square implements Polygon {
-    private final int side;
-
+public class Square extends MyRectangle {
     public Square(int side) {
-        this.side = side;
-    }
-
-
-    @Override
-    public int area() {
-        return side * side;
-    }
-
-    @Override
-    public int perimeter() {
-        return 4 * side;
+        super(side, side);
     }
 }
