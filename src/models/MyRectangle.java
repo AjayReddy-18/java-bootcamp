@@ -1,12 +1,24 @@
 package models;
 
-public class MyRectangle {
+import interfaces.Polygon;
 
-    public static int area(int length, int breadth) {
+public class MyRectangle implements Polygon {
+
+    private final int length;
+    private final int breadth;
+
+    MyRectangle(int length, int breadth){
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+    @Override
+    public int area() {
         return length * breadth;
     }
 
-    public static double area(double length, double breadth) {
-        return length * breadth;
+    @Override
+    public int perimeter() {
+        return 2 * (length + breadth);
     }
 }

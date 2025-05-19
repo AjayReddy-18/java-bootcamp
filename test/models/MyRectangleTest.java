@@ -7,13 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MyRectangleTest {
     @Test
     void areaOfRectangle() {
-        int area = MyRectangle.area(2, 4);
+        MyRectangle myRectangle = new MyRectangle(2, 4);
+        int area = myRectangle.area();
         assertEquals(8, area);
     }
 
     @Test
-    void areaOfFloatingDimensionRectanlge() {
-        double area = MyRectangle.area(2.5, 4.5);
-        assertEquals(11.25, area);
+    void perimeterOfRectangle() {
+        MyRectangle myRectangle = new MyRectangle(2,4);
+        int perimeter = myRectangle.perimeter();
+        assertEquals(12, perimeter);
     }
+
 }
