@@ -1,24 +1,30 @@
 package models;
 
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class FlippingProbability {
 
     private final String[] sampleSpace;
+    private final int totalOutcomes;
 
     public FlippingProbability(String[] sampleSpace) {
         this.sampleSpace = sampleSpace;
+        this.totalOutcomes = this.sampleSpace.length;
+    }
+
+    private long getFavourableOutcomes(Predicate f) {
+        return Arrays.stream(this.sampleSpace).filter(f).count();
     }
 
     public double probabilityOf(String event) {
-        double totalOutcomes = this.sampleSpace.length;
-        long favourableOutcomes = Arrays.stream(this.sampleSpace).filter(x -> x.equals(event)).count();
+        long favourableOutcomes = getFavourableOutcomes(x -> x.equals(event));
         return (double) favourableOutcomes / totalOutcomes;
     }
 
     public double probabilityOfNot(String event) {
-        double totalOutcomes = this.sampleSpace.length;
-        long favourableOutcomes = Arrays.stream(this.sampleSpace).filter(x -> !x.equals(event)).count();
+        long favourableOutcomes = getFavourableOutcomes(x -> !x.equals(event));
         return (double) favourableOutcomes / totalOutcomes;
     }
 }
