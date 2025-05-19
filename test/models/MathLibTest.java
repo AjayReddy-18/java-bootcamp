@@ -9,7 +9,7 @@ public class MathLibTest {
     void addTwoNumbers() {
         MathLib mathLib = new MathLib();
         int sum = mathLib.add(1, 2);
-        
+
         assertEquals(3, sum);
     }
 
