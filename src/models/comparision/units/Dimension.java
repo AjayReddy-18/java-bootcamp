@@ -3,17 +3,13 @@ package models.comparision.units;
 import java.util.Objects;
 
 public class Dimension {
-    private static final int MILLIMETER_FACTOR = 1;
-    private static final int CENTIMETER_FACTOR = 10;
-    private static final double INCHES_FACTOR = 2.5 * CENTIMETER_FACTOR;
-    private static final double FEET_FACTOR = 12 * INCHES_FACTOR;
-    public static final int LITER_FACTOR = 1;
-    private static final double GALLON_FACTOR = 3.78;
-    private final double units;
+    private final double totalUnits;
+    private final Unit unit;
     private final int dimension;
 
-    public Dimension(double units, int dimension) {
-        this.units = units;
+    public Dimension(double totalUnits, Unit unit, int dimension) {
+        this.totalUnits = totalUnits;
+        this.unit = unit;
         this.dimension = dimension;
     }
 
@@ -22,49 +18,56 @@ public class Dimension {
         throw new IllegalArgumentException("Illegal args");
     }
 
-    private static Dimension create(double units, double conversionFactor, int dimension) {
-        throwErrorIfInvalid(units);
-        return new Dimension(units * conversionFactor, dimension);
+    private static Dimension create(double unitValue, Unit unit, int dimension) {
+        throwErrorIfInvalid(unitValue);
+        return new Dimension(unitValue, unit, dimension);
     }
 
     public static Dimension createLengthFromFeet(double feet) {
-        return Dimension.create(feet, FEET_FACTOR, 1);
+        return create(feet, Unit.FEET, 1);
     }
 
     public static Dimension createLengthFromInches(double inches) {
-        return create(inches, INCHES_FACTOR, 1);
+        return create(inches, Unit.INCH, 1);
     }
 
     public static Dimension createLengthFromCentimeters(double centimeters) {
-        return create(centimeters, CENTIMETER_FACTOR, 1);
+        return create(centimeters, Unit.CENTIMETER, 1);
     }
 
     public static Dimension createLengthFromMillimeters(double millimeters) {
-        return create(millimeters, MILLIMETER_FACTOR, 1);
+        return create(millimeters, Unit.MILLIMETER, 1);
     }
 
     public static Dimension createVolumeFromGallons(double gallons) {
-        return create(gallons, GALLON_FACTOR, 3);
+        return create(gallons, Unit.GALLON, 3);
     }
 
     public static Dimension createVolumeFromLiters(double liters) {
-        return create(liters, LITER_FACTOR, 3);
+        return create(liters, Unit.LITER, 3);
+    }
+
+    public Dimension add(Dimension that) {
+        if (dimension != that.dimension) throw new IllegalArgumentException("Can't add different Dimensions");
+        Unit standardOutput = dimension == 1 ? Unit.INCH : Unit.LITER;
+
+        double totalUnits = (toBase() + that.toBase()) / standardOutput.conversionFactor;
+        return create(totalUnits, standardOutput, dimension);
+    }
+
+    private double toBase() {
+        return totalUnits * unit.conversionFactor;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Dimension dimension1 = (Dimension) o;
-        return Double.compare(units, dimension1.units) == 0 && dimension == dimension1.dimension;
+        return Double.compare(toBase(), dimension1.toBase()) == 0 && dimension == dimension1.dimension;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(units, dimension);
-    }
-
-    public Dimension add(Dimension that) {
-        double totalUnits = units + that.units;
-        return Dimension.create(totalUnits, 1, dimension);
+        return Objects.hash(totalUnits, unit, dimension);
     }
 }
