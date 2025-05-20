@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 public class VolumeTest {
     @Test
     void RepresentOneGallon() {
-        Volume oneGallon = Volume.createInGallons(1);
-        assert(Volume.createInGallons(1).equals(oneGallon));
+        Volume oneGallon = Volume.createFromGallons(1);
+        assert(Volume.createFromGallons(1).equals(oneGallon));
     }
 
     @Test
-    void CreateOneGallonOfLitres() {
-        Volume oneGallon = Volume.createInGallons(1);
-        Volume inLitres = Volume.createInLitres(3.78);
-        assert(oneGallon.equals(inLitres));
+    void CreateOneGallonOfLiters() {
+        Volume oneGallon = Volume.createFromGallons(1);
+        Volume inLiters = Volume.createFromLiters(3.78);
+        assert(oneGallon.equals(inLiters));
     }
 }

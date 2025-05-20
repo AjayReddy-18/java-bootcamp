@@ -1,8 +1,7 @@
 package models.math.shapes;
 
-import interfaces.Polygon;
 
-public class MyRectangle implements Polygon {
+public class MyRectangle {
 
     private final int length;
     private final int breadth;
@@ -20,12 +19,10 @@ public class MyRectangle implements Polygon {
         return new MyRectangle(side, side);
     }
 
-    @Override
     public int area() {
         return length * breadth;
     }
 
-    @Override
     public int perimeter() {
         return 2 * (length + breadth);
     }
