@@ -1,4 +1,4 @@
-package models;
+package models.math.shapes;
 
 import org.junit.jupiter.api.Test;
 

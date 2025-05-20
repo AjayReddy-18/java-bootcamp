@@ -1,4 +1,4 @@
-package models;
+package models.math.probability;
 
 import java.util.Objects;
 

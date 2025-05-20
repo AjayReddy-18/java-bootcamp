@@ -1,4 +1,4 @@
-package models;
+package models.math.probability;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

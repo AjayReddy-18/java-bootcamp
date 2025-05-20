@@ -1,9 +1,10 @@
-package models;
+package models.comparision.units;
 
 import java.util.Objects;
 
 public class Volume {
     private final double litres;
+    private static final double GALLON_FACTOR = 3.78;
 
     public Volume(double litres) {
         this.litres = litres;
@@ -20,7 +21,7 @@ public class Volume {
     }
 
     public static Volume createInGallons(double gallons) {
-        return Volume.create(gallons, 3.78);
+        return Volume.create(gallons, GALLON_FACTOR);
     }
 
     public static Volume createInLitres(double litres) {

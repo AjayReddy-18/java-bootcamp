@@ -1,4 +1,4 @@
-package models;
+package models.comparision.units;
 
 import java.util.Objects;
 
