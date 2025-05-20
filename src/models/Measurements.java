@@ -3,10 +3,10 @@ package models;
 import java.util.Objects;
 
 public class Measurements {
-    private final double units;
+    private final double millimeters;
 
-    private Measurements(double units) {
-        this.units = units;
+    private Measurements(double millimeters) {
+        this.millimeters = millimeters;
     }
 
     private static void throwErrorIfInvalid(double units) {
@@ -14,39 +14,36 @@ public class Measurements {
         throw new IllegalArgumentException("Illegal args");
     }
 
-    public static Measurements createInFeet(double feet) {
-        throwErrorIfInvalid(feet);
+    private static Measurements create(double units, double conversionFactor) {
+        throwErrorIfInvalid(units);
+        return new Measurements(units * conversionFactor);
+    }
 
-        return Measurements.createInInches(feet * 12);
+    public static Measurements createInFeet(double feet) {
+        return Measurements.create(feet, 12 * 2.5 * 10);
     }
 
     public static Measurements createInInches(double inches) {
-        throwErrorIfInvalid(inches);
-
-        return Measurements.createInCentimeters(inches * 2.5);
+        return Measurements.create(inches, 2.5 * 10);
     }
 
     public static Measurements createInCentimeters(double centimeters) {
-        throwErrorIfInvalid(centimeters);
-
-        return Measurements.createInMillimeters(centimeters * 10);
+        return Measurements.create(centimeters, 10);
     }
 
     public static Measurements createInMillimeters(double millimeters) {
-        throwErrorIfInvalid(millimeters);
-
-        return new Measurements(millimeters);
+        return Measurements.create(millimeters, 1);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Measurements that = (Measurements) o;
-        return Double.compare(units, that.units) == 0;
+        return Double.compare(millimeters, that.millimeters) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(units);
+        return Objects.hashCode(millimeters);
     }
 }
