@@ -7,6 +7,8 @@ public class Dimension {
     private static final int CENTIMETER_FACTOR = 10;
     private static final double INCHES_FACTOR = 2.5 * CENTIMETER_FACTOR;
     private static final double FEET_FACTOR = 12 * INCHES_FACTOR;
+    public static final int LITER_FACTOR = 1;
+    private static final double GALLON_FACTOR = 3.78;
     private final double units;
     private final int dimension;
 
@@ -39,6 +41,14 @@ public class Dimension {
 
     public static Dimension createLengthFromMillimeters(double millimeters) {
         return create(millimeters, MILLIMETER_FACTOR, 1);
+    }
+
+    public static Dimension createVolumeFromGallons(double gallons) {
+        return create(gallons, GALLON_FACTOR, 3);
+    }
+
+    public static Dimension createVolumeFromLiters(double liters) {
+        return create(liters, LITER_FACTOR, 3);
     }
 
     @Override

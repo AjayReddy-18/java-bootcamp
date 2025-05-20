@@ -2,8 +2,7 @@ package models.comparision.units;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DimensionTest {
     @Test
@@ -52,5 +51,25 @@ public class DimensionTest {
     void TwoInchesPlusTwoInchesIsFourInches() {
         Dimension twoInches = Dimension.createLengthFromInches(2);
         assertEquals(twoInches.add(twoInches), Dimension.createLengthFromInches(4));
+    }
+
+    @Test
+    void RepresentOneGallon() {
+        Dimension oneGallon = Dimension.createVolumeFromGallons(1);
+        assert(Dimension.createVolumeFromGallons(1).equals(oneGallon));
+    }
+
+    @Test
+    void CreateOneGallonOfLiters() {
+        Dimension oneGallon = Dimension.createVolumeFromGallons(1);
+        Dimension inLiters = Dimension.createVolumeFromLiters(3.78);
+        assert(oneGallon.equals(inLiters));
+    }
+
+    @Test
+    void shouldBeFalseWithDifferentDimensions() {
+        Dimension lengthFromMillimeters = Dimension.createLengthFromMillimeters(1);
+        Dimension volumeFromLiters = Dimension.createVolumeFromLiters(1);
+        assertNotEquals(lengthFromMillimeters, volumeFromLiters);
     }
 }
