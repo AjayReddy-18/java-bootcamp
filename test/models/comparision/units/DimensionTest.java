@@ -72,4 +72,19 @@ public class DimensionTest {
         Dimension volumeFromLiters = Dimension.createVolumeFromLiters(1);
         assertNotEquals(lengthFromMillimeters, volumeFromLiters);
     }
+
+    @Test
+    void OneGallonPlusOneLitre() {
+        Dimension oneGallon = Dimension.createVolumeFromGallons(1);
+        Dimension oneLitre = Dimension.createVolumeFromLiters(1);
+        assertEquals(oneGallon.add(oneLitre), Dimension.createVolumeFromLiters(4.78));
+    }
+
+    @Test
+    void ShouldNotBeAbleToAddDifferentDimensions() {
+        Dimension oneGallon = Dimension.createVolumeFromGallons(1);
+        Dimension oneCentimeter = Dimension.createLengthFromCentimeters(1);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> oneGallon.add(oneCentimeter));
+        assertEquals(exception.getMessage(), "Can't add different Dimensions");
+    }
 }

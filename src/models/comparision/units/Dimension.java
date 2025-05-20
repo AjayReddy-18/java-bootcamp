@@ -3,7 +3,7 @@ package models.comparision.units;
 import java.util.Objects;
 
 public class Dimension {
-    private final double totalUnits;
+    public final double totalUnits;
     private final Unit unit;
     private final int dimension;
 
@@ -63,7 +63,8 @@ public class Dimension {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Dimension dimension1 = (Dimension) o;
-        return Double.compare(toBase(), dimension1.toBase()) == 0 && dimension == dimension1.dimension;
+        double difference = toBase() - dimension1.toBase();
+        return difference < 0.01 || difference >= 0 && dimension == dimension1.dimension;
     }
 
     @Override
